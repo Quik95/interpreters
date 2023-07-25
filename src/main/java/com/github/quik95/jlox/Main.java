@@ -43,7 +43,10 @@ public class Main {
         var statements = parser.parse();
 
         if (hadError) return;
+        var resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
 
+        if (hadError) return;
         interpreter.interpret(statements);
     }
 
