@@ -12,4 +12,4 @@ set(ASAN_OPTIONS=abort_on_error=1:halt_on_error=1)
 set(UBSAN_OPTIONS=abort_on_error=1:halt_on_error=1)
 set(CMAKE_C_STANDARD 11)
 
-add_executable(jlox main.c common.h chunk.h chunk.c memory.h memory.c debug.h debug.c value.h value.c)
+add_executable(jlox main.c common.h chunk.h chunk.c memory.h memory.c debug.h debug.c value.h value.c vm.h vm.c)
