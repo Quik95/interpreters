@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(jlox C)
+project(clox C)
 
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
@@ -18,6 +18,7 @@ set(ASAN_OPTIONS=abort_on_error=1:halt_on_error=1:detect_leak=1)
 set(UBSAN_OPTIONS=abort_on_error=1:halt_on_error=1)
 set(CMAKE_C_STANDARD 11)
 
-add_executable(jlox main.c common.h chunk.h chunk.c memory.h memory.c debug.h debug.c value.h value.c vm.h vm.c compiler.h compiler.c scanner.h scanner.c
+add_executable(clox main.c common.h chunk.h chunk.c memory.h memory.c debug.h debug.c value.h value.c vm.h vm.c compiler.h compiler.c scanner.h scanner.c table.h
         object.h
-        object.c)
+        object.c
+        table.c)
