@@ -18,7 +18,9 @@ static Obj *allocateObject(size_t size, ObjType type);
 ObjString *copyString(const char *chars, int length) {
     uint32_t hash = hashString(chars, length);
     ObjString *interned = tableFindString(&vm.strings, chars, length, hash);
+
     if (interned != NULL) return interned;
+
     char *heapChars = ALLOCATE(char, length + 1);
     memcpy(heapChars, chars, length);
     heapChars[length] = '\0';
@@ -34,12 +36,12 @@ void printObject(Value value) {
 }
 
 ObjString *takeString(char *chars, int length) {
+    uint32_t hash = hashString(chars, length);
     ObjString *interned = tableFindString(&vm.strings, chars, length, hash);
     if (interned != NULL) {
         FREE_ARRAY(char, chars, length + 1);
         return interned;
     }
-    uint32_t hash = hashString(chars, length);
     return allocateString(chars, length, hash);
 }
 
