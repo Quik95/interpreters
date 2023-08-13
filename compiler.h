@@ -6,4 +6,6 @@
 
 ObjFunction *compile(const char *source);
 
+void markCompilerRoot();
+
 #endif //CLOX_COMPILER_H
