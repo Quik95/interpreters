@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"fmt"
 	"monkey_lang/object"
 )
 
@@ -10,6 +11,15 @@ var builtins = map[string]*object.Builtin{
 	"last":  {Fn: lastBuiltin},
 	"rest":  {Fn: restBuiltin},
 	"push":  {Fn: pushBuiltin},
+	"puts":  {Fn: putsBuiltin},
+}
+
+func putsBuiltin(args ...object.Object) object.Object {
+	for _, arg := range args {
+		fmt.Println(arg.Inspect())
+	}
+
+	return NULL
 }
 
 func pushBuiltin(args ...object.Object) object.Object {
