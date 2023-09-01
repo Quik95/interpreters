@@ -352,3 +352,6 @@ buildNumber.properties
 # End of https://www.toptal.com/developers/gitignore/api/clion,cmake,intellij,java,maven,go,goland
 /clox
 /jlox
+test.exe
+tool/.dart_tool
+tool/.packages
