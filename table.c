@@ -35,7 +35,7 @@ void adjustCapacity(Table *table, int capacity) {
         Entry *entry = &table->entries[i];
         if (entry->key == NULL)continue;
 
-        Entry *dest = findEntry(entries, capacity, entries->key);
+        Entry *dest = findEntry(entries, capacity, entry->key);
         dest->key = entry->key;
         dest->value = entry->value;
         table->count++;
