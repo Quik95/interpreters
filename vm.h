@@ -26,6 +26,12 @@ typedef struct {
     CallFrame frames[FRAMES_MAX];
     int frameCount;
     ObjUpvalue *openUpvalues;
+
+    int grayCount;
+    int grayCapacity;
+    Obj **grayStack;
+    size_t bytesAllocated;
+    size_t nextGC;
 } VM;
 
 
