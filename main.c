@@ -51,10 +51,12 @@ static char *readFile(const char *path) {
 
 static void runFile(const char *path) {
     char *source = readFile(path);
+#ifdef __SANITIZE_ADDRESS__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wimplicit-function-declaration"
     __lsan_disable();
 #pragma clang diagnostic pop
+#endif
 
     InterpretResult result = interpret(source);
     free(source);

@@ -26,6 +26,7 @@ typedef struct {
     CallFrame frames[FRAMES_MAX];
     int frameCount;
     ObjUpvalue *openUpvalues;
+    ObjString *initString;
 
     int grayCount;
     int grayCapacity;
