@@ -140,6 +140,7 @@ ObjString *allocateString(char *chars, int length, uint32_t hash) {
 Obj *allocateObject(size_t size, ObjType type) {
     Obj *object = (Obj *) reallocate(NULL, 0, size);
     object->type = type;
+    object->isMarked = false;
 
     object->next = vm.objects;
     object->isMarked = false;

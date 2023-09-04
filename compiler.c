@@ -99,6 +99,34 @@ static void emitConstant(Value value);
 
 static uint8_t makeConstant(Value value);
 
+
+static void binary(bool canAssign);
+
+static void literal(bool canAssign);
+
+static void grouping(bool canAssign);
+
+static void number(bool canAssign);
+
+static void string(bool canAssign);
+
+static void unary(bool canAssign);
+
+static void variable(bool canAssign);
+
+static void and_(bool canAssign);
+
+static void or_(bool canAssign);
+
+static void call(bool canAssign);
+
+static void dot(bool canAssign);
+
+static void this_(bool canAssign);
+
+static void super_(bool canAssign);
+
+
 static void expression();
 
 static void binary(bool canAssign);
@@ -231,8 +259,8 @@ ParseRule rules[] = {
         [TOKEN_OR]            = {NULL, or_, PREC_OR},
         [TOKEN_PRINT]         = {NULL, NULL, PREC_NONE},
         [TOKEN_RETURN]        = {NULL, NULL, PREC_NONE},
-        [TOKEN_SUPER]         = {NULL, NULL, PREC_NONE},
-        [TOKEN_THIS]          = {NULL, NULL, PREC_NONE},
+        [TOKEN_SUPER]         = {super_, NULL, PREC_NONE},
+        [TOKEN_THIS]          = {this_, NULL, PREC_NONE},
         [TOKEN_TRUE]          = {literal, NULL, PREC_NONE},
         [TOKEN_VAR]           = {NULL, NULL, PREC_NONE},
         [TOKEN_WHILE]         = {NULL, NULL, PREC_NONE},

@@ -35,7 +35,7 @@ void adjustCapacity(Table *table, int capacity) {
         Entry *entry = &table->entries[i];
         if (entry->key == NULL)continue;
 
-        Entry *dest = findEntry(entries, capacity, entries->key);
+        Entry *dest = findEntry(entries, capacity, entry->key);
         dest->key = entry->key;
         dest->value = entry->value;
         table->count++;
@@ -95,7 +95,7 @@ bool tableDelete(Table *table, ObjString *key) {
 ObjString *tableFindString(Table *table, const char *chars, int length, uint32_t hash) {
     if (table->count == 0) return NULL;
 
-    uint32_t index = hash % table->capacity;
+    uint32_t index = hash & (table->capacity - 1);
     for (;;) {
         Entry *entry = &table->entries[index];
         if (entry->key == NULL) {
@@ -120,7 +120,7 @@ void tableRemoveWhite(Table *table) {
 }
 
 static Entry *findEntry(Entry *entries, int capacity, ObjString *key) {
-    uint32_t index = key->hash % capacity;
+    uint32_t index = key->hash & (capacity - 1);
     Entry *tombstone = NULL;
     for (;;) {
         Entry *entry = &entries[index];
@@ -134,6 +134,6 @@ static Entry *findEntry(Entry *entries, int capacity, ObjString *key) {
             return entry;
         }
 
-        index = (index + 1) % capacity;
+        index = (index + 1) & (capacity - 1);
     }
 }

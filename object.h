@@ -23,6 +23,33 @@ struct Obj {
     bool isMarked;
 };
 
+typedef struct {
+    Obj obj;
+    ObjString *name;
+    Table methods;
+} ObjClass;
+
+typedef struct {
+    Obj obj;
+    ObjClass *klass;
+    Table fields;
+} ObjInstance;
+
+typedef struct {
+    Obj obj;
+    int arity;
+    int upvalueCount;
+    Chunk chunk;
+    ObjString *name;
+} ObjFunction;
+
+typedef Value (*NativeFn)(int argCount, Value *args);
+
+typedef struct {
+    Obj obj;
+    NativeFn function;
+} ObjNative;
+
 struct ObjString {
     Obj obj;
     int length;

@@ -35,6 +35,7 @@ typedef struct {
     size_t nextGC;
 } VM;
 
+
 typedef enum {
     INTERPRET_OK,
     INTERPRET_COMPILE_ERROR,

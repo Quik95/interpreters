@@ -12,9 +12,9 @@ add_compile_options(-fsanitize=leak)
 
 add_link_options(-fsanitize=address,undefined -fsanitize-trap=undefined)
 add_link_options(-fsanitize=null)
-add_compile_options(-fsanitize=leak)
+add_link_options(-fsanitize=leak)
 
-set(ASAN_OPTIONS=abort_on_error=1:halt_on_error=1:detect_leak=1)
+set(ASAN_OPTIONS=abort_on_error=1:halt_on_error=1:detect_leaks=1)
 set(UBSAN_OPTIONS=abort_on_error=1:halt_on_error=1)
 set(CMAKE_C_STANDARD 11)
 

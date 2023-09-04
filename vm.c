@@ -61,6 +61,8 @@ void initVM() {
 void freeVM() {
     freeTable(&vm.globals);
     freeTable(&vm.strings);
+    freeTable(&vm.globals);
+    vm.initString = NULL;
     freeObjects();
 }
 
@@ -107,7 +109,9 @@ static InterpretResult run() {
         double a = AS_NUMBER(pop());                        \
         push(valueType(a op b));                            \
     } while(false)
-
+#define READ_STRING() AS_STRING(READ_CONSTANT())
+#define READ_SHORT() \
+    (frame->ip += 2, (uint16_t)((frame->ip[-2] << 8) | frame->ip[-1]))
 
     for (;;) {
 #ifdef DEBUG_TRACE_EXECUTION
@@ -158,7 +162,7 @@ static InterpretResult run() {
                     double a = AS_NUMBER(pop());
                     push(NUMBER_VAL(a + b));
                 } else {
-                    runtimeError("Operands must be two numbers or two string.");
+                    runtimeError("Operands must be two numbers or two strings.");
                     return INTERPRET_RUNTIME_ERROR;
                 }
                 break;
